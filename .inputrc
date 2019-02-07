@@ -1,0 +1,97 @@
+
+set bell-style none
+set editing-mode emacs
+set keymap emacs
+
+# New 07/08/17
+# From https://www.topbug.net/blog/2017/07/31/inputrc-for-humans/
+# display possible completions using different colors to indicate their file type
+set colored-stats on 
+
+# Make Tab autocomplete regardless of filename case
+set completion-ignore-case on
+# bash completions does not use more
+#set page-completions off
+
+# Make it simple to see what you need to type to finish completion
+set completion-prefix-display-length 2
+
+# Immediately add a trailing slash when autocompleting symlinks to directories
+set mark-symlinked-directories on
+
+# Show extra file information when completing, like `ls -F` does
+#set visible-stats on
+
+set bell-style visible
+set expand-tilde off
+
+set match-hidden-files off
+
+# Be more intelligent when autocompleting by also looking at the text after
+# the cursor. For example, when the current line is "cd ~/src/mozil", and
+# the cursor is on the "z", pressing Tab will not autocomplete it to "cd
+# ~/src/mozillail", but to "cd ~/src/mozilla". (This is supported by the
+# Readline used by Bash 4.)
+set skip-completed-text on
+
+# Completion cycling
+# List all matches in case multiple possible completions are possible
+#set show-all-if-ambiguous on
+# Alt+s to cycle through compeltion list
+#"\M-s": menu-complete
+
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+"\e[5~": beginning-of-history
+"\e[6~": end-of-history
+"\e[3~": delete-char
+"\e[2~": quoted-insert
+"\e[5C": forward-word
+"\e[5D": backward-word
+"\e\e[C": forward-word
+"\e\e[D": backward-word
+
+# Incremental search with up and down arrow keys
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Perform history expansion on the current line (eg ls !* expands to ls foo bar)
+$if Bash
+      Space: magic-space
+$endif
+
+# Get alt (option) key working
+#set meta-flag on
+#set convert-meta off
+#set output-meta on
+
+#"\M-0"  digit-argument
+#"\M-1"  digit-argument
+#"\M-2"  digit-argument
+#"\M-3"  digit-argument
+#"\e-3"  digit-argument
+#"\e3"  digit-argument # escape, not alt
+#"\e\e[3"  digit-argument
+#"\325-3"  digit-argument
+#"\M-4"  digit-argument
+#"\M-5"  digit-argument
+#"\M-6"  digit-argument
+#"\M-7"  digit-argument
+#"\M-8"  digit-argument
+#"\M-9"  digit-argument
+
+# Many of the following don't seem to work
+# 15 letters available for use with Meta, namely: 
+# Meta+A, Meta+E, Meta+G, Meta+H, Meta+I, Meta+J, Meta+K, 
+# Meta+M, Meta+O, Meta+Q, Meta+S, Meta+V, Meta+W, Meta+X, and Meta+Z
+# Hint: Use Ctrl-v to get character escape codes
+# Alt+o loads previous command and positions cursor for adding an option
+#"\M-o": "\C-p\C-a\M-f "
+
+# TODO Get these working
+#"\M-l": "ls -ltrF\r"
+#Alt-l: "SELECT , COUNT(*) FROM  GROUP BY 1;"
+#"\M-l": "SELECT , COUNT(*) FROM  GROUP BY 1;"
+#bind '"\M-l":"SELECT , COUNT(*) FROM  GROUP BY 1;"'
+#"\302": "SELECT , COUNT(*) FROM  GROUP BY 1;\C-a√ " # does not work in xterm??
+

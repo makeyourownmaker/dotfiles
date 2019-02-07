@@ -1,0 +1,43 @@
+
+# Highlight grep matches
+#export GREP_OPTIONS='--color=always' # breakage ahead
+export GREP_OPTIONS='--color=auto'
+
+# Color highlighting in man pages etc
+export LESS='-FRSX'
+export LESSCHARSET='UTF-8'
+export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
+export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
+export LESS_TERMCAP_me=$'\E[0m'           # end mode
+export LESS_TERMCAP_se=$'\E[0m'           # end standout-mode
+export LESS_TERMCAP_so=$'\E[38;5;246m'    # begin standout-mode - info box
+export LESS_TERMCAP_ue=$'\E[0m'           # end underline
+export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
+
+export MANPAGER='less -s -M +Gg'
+
+# Prompt
+export PS1="\u@\h:\w\\n$ "
+
+# bash eternal history
+export HISTTIMEFORMAT='%F %T '
+export HISTSIZE=100000
+export HISTCONTROL=ignoreboth:erasedups # no duplicate entries
+
+export EDITOR=vim
+
+export INPUTRC=~/.inputrc
+
+export TERM=xterm-256color
+#export TERM=xterm
+
+# set PATH so it includes user's private bin if it exists
+if [ -d ~/bin ] ; then
+    PATH=~/bin:"${PATH}"
+fi
+
+# MySQL
+if [ -z "$MYSQL_PS1" ]; then
+    export MYSQL_PS1="\u@\h:\d (\c)\n> "
+fi
+
