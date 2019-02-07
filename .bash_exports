@@ -1,7 +1,7 @@
 
 # Highlight grep matches
 #export GREP_OPTIONS='--color=always' # breakage ahead
-export GREP_OPTIONS='--color=auto'
+#export GREP_OPTIONS='--color=auto'
 
 # Color highlighting in man pages etc
 export LESS='-FRSX'
