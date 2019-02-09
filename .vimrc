@@ -391,18 +391,17 @@ endfunction
 
 set t_Co=256
 set background=dark
-"let g:solarized_termcolors=256 " Improves standard Terminal.app, worse for iTerm2
+let g:solarized_termcolors=256 " Improves standard Terminal.app, worse for iTerm2
 "let g:solarized_termtrans = 1  " Improves transparency in Terminal.app
-"let g:solarized_contrast="high"
+let g:solarized_contrast="high"
 colorscheme solarized
 
 
 "================================================================================
 " statusline
-" Define 3 custom highlight groups - PoC
-"hi User1 ctermbg=green ctermfg=red   guibg=green guifg=red
-"hi User2 ctermbg=red   ctermfg=blue  guibg=red   guifg=blue
-"hi User3 ctermbg=blue  ctermfg=green guibg=blue  guifg=green
+"   User color definitions need to come after colorscheme selection
+hi User3 ctermbg=blue  ctermfg=green guibg=blue  guifg=green
+hi User9 ctermbg=grey  ctermfg=white guibg=grey  guifg=white
 
 set showmode  showcmd  cmdheight=1
 set laststatus=2              " always show statusline
@@ -414,13 +413,13 @@ if has("statusline")
 
     " Display buffer info when more than one buffer
     if bufnr('$') > 1
-      set statusline  +=%3*           " switch to User2 highlight 
+      set statusline  +=%3*           " switch to User3 highlight 
       set statusline  +=\ Buf:\ %n/   " Current buffer number
       set statusline  +=%{bufnr('$')} " Total number of buffers
       set statusline  +=\             " space
     endif
 
-    set statusline+=%9*       " switch to User2 highlight 
+    set statusline+=%9*       " switch to User9 highlight 
     set statusline+=%=        " right align remainder
     set statusline+=%*        " switch back to statusline highlight
     set statusline+=\ Col:    "
