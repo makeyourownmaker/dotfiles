@@ -104,6 +104,9 @@ set foldnestmax=10      " 10 nested fold max
 set foldmethod=indent   " fold based on indent level
 "nnoremap <space> za    " space open/closes folds
 
+" Make vim update faster e.g. ';=' to align = signs
+set timeoutlen=0
+
 " Store all undo files in a single directory
 if has('persistent_undo')
     set undolevels=5000
@@ -246,6 +249,10 @@ vmap <leader>uc  :call ChangeSqlCase()<cr>
 
 " RainbowParenthsis.vim
 runtime plugin/RainbowParenthsis.vim
+
+" CheckAttach for use with mutt
+" https://github.com/chrisbra/CheckAttach
+let g:attach_check_keywords = 'attached,attachment'
 
 
 " Syntastic
