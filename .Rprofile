@@ -152,16 +152,22 @@ lsos <- function(..., n=10) {
 # list objects without functions i.e. list data objects only
 #ls_data <- function() setdiff(ls(), lsf.str())
 
+# list functions in packages e.g. lsp('data.table')
+lsp <- function(lib) {
+  library(lib, character.only=TRUE)
+  ls(pos=paste0("package:", lib))
+}
+
 
 # http://alandgraf.blogspot.de/2013/02/copying-data-from-excel-to-r-and-back_24.html
 # dat=read.excel()
-read.excel <- function(header=TRUE,...) {
-  read.table("clipboard",sep="\t",header=header,...)
+read.excel <- function(header=TRUE, ...) {
+  read.table("clipboard", sep="\t", header=header, ...)
 }
 
 # write.excel(dat)
-write.excel <- function(x,row.names=FALSE,col.names=TRUE,...) {
-  write.table(x,"clipboard",sep="\t",row.names=row.names,col.names=col.names,...)
+write.excel <- function(x, row.names=FALSE, col.names=TRUE, ...) {
+  write.table(x, "clipboard", sep="\t", row.names=row.names, col.names=col.names, ...)
 }
 
 
