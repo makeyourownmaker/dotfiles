@@ -250,6 +250,10 @@ vmap <leader>uc  :call ChangeSqlCase()<cr>
 " RainbowParenthsis.vim
 runtime plugin/RainbowParenthsis.vim
 
+" CheckAttach for use with mutt
+" https://github.com/chrisbra/CheckAttach
+let g:attach_check_keywords = 'attached,attachment'
+
 
 " Syntastic
 set statusline+=%#warningmsg#
