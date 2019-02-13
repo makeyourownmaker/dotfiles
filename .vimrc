@@ -198,7 +198,8 @@ vnoremap <A-l> >gv
 vnoremap . :norm.<CR>
 
 " Clear highlighted searchs
-nmap <silent> <leader>/ :call HLNextOff() <BAR> :nohlsearch<CR>
+nnoremap <silent> <CR> :noh<CR><CR> " Clear search highlight by hitting enter
+"nmap <silent> <leader>/ :call HLNextOff() :nohlsearch<CR> " Not working :-(
 
 " Smart to move windows
 map <C-j> <C-W>j
