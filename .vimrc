@@ -16,10 +16,8 @@ set ruler
 " Preserve current indent on new lines
 set autoindent
 set copyindent
-set smartindent
+"set smartindent " Deprecated - commenting out so I don't add it back later
 
-" Turn off autoindent when pasting highlighted text - F3 turn back on
-set pastetoggle=,p
 
 " Wrap at this column
 "set textwidth=78
@@ -120,7 +118,11 @@ filetype plugin on
 filetype indent on
 filetype plugin indent on
 
+
 let mapleader=","
+
+" Turn off autoindent when pasting highlighted text - F3 turn back on
+set pastetoggle=<leader>p
 
 " Create an underscore of separators as per asciidoc defaults
 noremap <leader>0 <Esc>80i=<Esc>
@@ -131,6 +133,26 @@ noremap <leader>4 <Esc>80i+<Esc>
 
 " Clean up whitespace
 noremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" Mappings to access buffers (don't use "\p" because a
+" delay before pressing "p" would accidentally paste).
+" \l       : list buffers
+" \b \f \g : go back/forward/last-used
+" \1 \2 \3 : go to buffer 1/2/3 etc
+nnoremap <Leader>l :ls<CR>
+nnoremap <Leader>b :bp<CR>
+nnoremap <Leader>f :bn<CR>
+nnoremap <Leader>g :e#<CR>
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
 
 " Save session - reopen session with vim -S
 nnoremap <leader>s :mksession<CR>
@@ -198,6 +220,7 @@ vnoremap <A-l> >gv
 vnoremap . :norm.<CR>
 
 " Clear highlighted searchs
+"nnoremap <silent> <CR> :noh<CR><CR> " Clear search highlight by hitting enter
 nnoremap <silent> <CR> :noh<CR><CR> " Clear search highlight by hitting enter
 "nmap <silent> <leader>/ :call HLNextOff() :nohlsearch<CR> " Not working :-(
 
