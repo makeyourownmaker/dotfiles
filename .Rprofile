@@ -227,6 +227,19 @@ duplicateCols <- function(x) {
 #nearlyDuplicateCols <- function(x) {
 #}
 
+# Find long series of rolled over (repeated) measurements
+# Useful for checking time series etc
+# Assumes data frame x is already sorted
+# Check distribution of repeat lengths and establish cutoffs for each column
+findrollovers <- function(x) {
+    if( !is.data.frame(x) ) stop("Not a data frame!")
+
+    runs <- sapply(x, function(y) rle(as.vector(y))$lengths )
+    x.runs <- sapply(runs, function(z) rep(z, times=z) )
+
+    as.data.frame(x.runs)
+}
+
 
 # Change factors to strings
 unfactorize <- function(df){
