@@ -139,20 +139,38 @@ noremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " \l       : list buffers
 " \b \f \g : go back/forward/last-used
 " \1 \2 \3 : go to buffer 1/2/3 etc
-nnoremap <Leader>l :ls<CR>
-nnoremap <Leader>b :bp<CR>
-nnoremap <Leader>f :bn<CR>
-nnoremap <Leader>g :e#<CR>
-nnoremap <Leader>1 :1b<CR>
-nnoremap <Leader>2 :2b<CR>
-nnoremap <Leader>3 :3b<CR>
-nnoremap <Leader>4 :4b<CR>
-nnoremap <Leader>5 :5b<CR>
-nnoremap <Leader>6 :6b<CR>
-nnoremap <Leader>7 :7b<CR>
-nnoremap <Leader>8 :8b<CR>
-nnoremap <Leader>9 :9b<CR>
-nnoremap <Leader>0 :10b<CR>
+"nnoremap <Leader>l :ls<CR>
+"nnoremap <Leader>b :bp<CR>
+"nnoremap <Leader>f :bn<CR>
+"nnoremap <Leader>g :e#<CR>
+"nnoremap <Leader>1 :1b<CR>
+"nnoremap <Leader>2 :2b<CR>
+"nnoremap <Leader>3 :3b<CR>
+"nnoremap <Leader>4 :4b<CR>
+"nnoremap <Leader>5 :5b<CR>
+"nnoremap <Leader>6 :6b<CR>
+"nnoremap <Leader>7 :7b<CR>
+"nnoremap <Leader>8 :8b<CR>
+"nnoremap <Leader>9 :9b<CR>
+"nnoremap <Leader>0 :10b<CR>
+" The above set of mappings have stopped working
+" Don't know when this stopped working and don't have time to debug now
+
+" Use {buffer number}<C-F> to switch buffers
+" From here: https://vi.stackexchange.com/a/9789
+nnoremap <C-F> :<C-U>call SwitchToBuffer()<CR>
+
+function! SwitchToBuffer()
+  if v:count > 0
+    exec v:count . "b"
+    return
+  endif
+
+  " Whatever you want to do if you didn't provide a count
+  " fall back to buffer list technique:
+  call feedkeys(":ls\n:b ")
+endfunction
+
 
 " Save session - reopen session with vim -S
 nnoremap <leader>s :mksession<CR>
@@ -220,7 +238,6 @@ vnoremap <A-l> >gv
 vnoremap . :norm.<CR>
 
 " Clear highlighted searchs
-"nnoremap <silent> <CR> :noh<CR><CR> " Clear search highlight by hitting enter
 nnoremap <silent> <CR> :noh<CR><CR> " Clear search highlight by hitting enter
 "nmap <silent> <leader>/ :call HLNextOff() :nohlsearch<CR> " Not working :-(
 
@@ -236,7 +253,7 @@ cmap w!! w !sudo tee % >/dev/null
 " extract perl code block into a subroutine
 " From http://www.bofh.org.uk/2006/09/21/crossing-the-rubicon-again
 " source http://fsck.com/~jesse/extract
-map ,pex <Esc>:'<,'>! $HOME/bin/extract_perl_sub.pl<CR>
+map <leader>pex <Esc>:'<,'>! $HOME/bin/extract_perl_sub.pl<CR>
 
 
 "================================================================================
