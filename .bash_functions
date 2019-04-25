@@ -120,3 +120,9 @@ function taocl() {
         xmlstarlet unesc | fmt -80
 }
 
+# make ugly R code less ugly
+styler() {
+    cp $1 $1.orig
+    Rscript -e 'args <- commandArgs(trailingOnly = TRUE); styler::style_file(args[1])' $1
+}
+
