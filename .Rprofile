@@ -193,19 +193,20 @@ zeroVarCols <- function(x) {
 }
 
 # Check for columns with near zero variation
+# Returns col names TODO Make consistent with nearlyDuplicateCols (return both)
 nearZeroVarCols <- function(x, n=6) {
   nums <- sapply(x, is.numeric)
-  vars <- apply(iwpc[, nums], 2, function(y) var(y, na.rm=T))
+  vars <- apply(x[, nums], 2, function(y) var(y, na.rm=T))
   head(sort(vars), n)
 }
 
 # Check for columns which contain mostly NAs
 mostlyNAcols <- function(x, n=6) {
-  tail(sort(apply(iwpc, 2, function(x) sum(is.na(x)))), n)
+  tail(sort(apply(x, 2, function(x) sum(is.na(x)))), n)
 } 
 
 mostlyNArows <- function(x, n=6) {
-  nas <- as.data.frame(apply(iwpc, 1, function(x) sum(is.na(x))))
+  nas <- as.data.frame(apply(x, 1, function(x) sum(is.na(x))))
   names(nas) <- "NAs"
   nas$row <- 1:nrow(nas) # Yes, have to add this to avoid getting NA count list
   tail(nas[order(nas$NAs), ], n)
@@ -222,16 +223,22 @@ duplicateCols <- function(x) {
   unlist(dupCols[duplicated(dupCols)])
 }
 
-# TODO Check for columns with almost perfect correlations
-#      Watch out for factor columns
-#nearlyDuplicateCols <- function(x) {
-#}
+# Check for columns with high correlation
+# Returns col positions TODO Make consistent with nearZeroVarCols (return both)
+# Watch out for factor columns
+# 0.95 is somewhat arbitrary value
+# Also check vif()
+nearlyDuplicateCols <- function(x, cor_limit=0.95) {
+    cor_mat <- cor(x)
+    #which(abs(cor_mat) > cor_limit & lower.tri(cor_mat), arr.ind = T, useNames = F)
+    unique(which(abs(cor(scurve)) > 0.85 & lower.tri(cor(scurve)), arr.ind=T)[, 2])
+}
 
-# Find long series of rolled over (repeated) measurements
+# Find long series of repeated measurements
 # Useful for checking time series etc
 # Assumes data frame x is already sorted
 # Check distribution of repeat lengths and establish cutoffs for each column
-findrollovers <- function(x) {
+findRepeats <- function(x) {
     if( !is.data.frame(x) ) stop("Not a data frame!")
 
     runs <- sapply(x, function(y) rle(as.vector(y))$lengths )
@@ -253,11 +260,11 @@ as.numeric.factor <- function (x) as.numeric(as.character.factor(x))
 
 
 # Set R prompt and window title
-#windowTitle<-"foobar"
+#windowTitle <- "foobar"
 #setPromptWindowTitle(windowTitle)
 setPromptWindowTitle <- function(windowTitle) {
   utils::setWindowTitle(windowTitle)
-  myPrompt<-paste(windowTitle, '> ', sep='')
+  myPrompt <- paste(windowTitle, '> ', sep='')
   options(prompt=myPrompt)
 }
 
