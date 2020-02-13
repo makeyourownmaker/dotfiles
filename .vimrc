@@ -50,11 +50,32 @@ set matchpairs+=<:>
 " When the page starts to scroll, keep the cursor 3 lines from the top and 3 lines from the bottom
 set scrolloff=3
 
+
+" Wildmenu completion
 " Make the command-line completion better
 set wildmenu
 
+set wildmode=list:longest
+
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+set wildignore+=*.pyc                            " Python byte code
+set wildignore+=*.orig                           " Merge resolution files
+
+
 " Redraw only when we need to.
 set lazyredraw
+
+" More characters are sent to the screen
+set ttyfast
+
+" Don't try to highlight lines longer than 800 characters.
+set synmaxcol=800
 
 " Make sure that unsaved buffers that are to be put in the background are 
 " allowed to go in there (ie. the 'must save first' error doesn't come up)
