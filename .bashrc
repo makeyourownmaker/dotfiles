@@ -1,4 +1,7 @@
 
+# Prevent rsync protocol version mismatch errors - 17/02/20
+[ -z "$PS1" ] && return
+
 # Source bash exports
 if [ -f $HOME/.bash_exports ]; then
     . $HOME/.bash_exports
