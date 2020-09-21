@@ -49,17 +49,23 @@ Pushed changes to the remote repository from another machine? Easy, just pull do
 dotfiles pull
 ~~~
 
-Want to know what's going on? Sure:
+Want to know what's going on?
 
 ~~~bash
 dotfiles status
 ~~~
 
+Don't want to see untracked files:
+
+~~~bash
+dotfiles config status.showUntrackedFiles no
+~~~
 
 ## References
 
 Using a bare Git repository is described here:
 
+- [Ask HN: What do you use to manage dotfiles?](https://news.ycombinator.com/item?id=11071754)
 - <https://harfangk.github.io/2016/09/18/manage-dotfiles-with-a-git-bare-repository.html>
 - <https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/>
 
